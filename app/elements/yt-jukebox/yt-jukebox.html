@@ -1,0 +1,218 @@
+
+<link rel="import" href="../yt-input/yt-input.html">
+<link rel="import" href="../yt-video/yt-video.html">
+<link rel="import" href="../yt-search/yt-search.html">
+
+<!-- Bower elements -->
+<link rel="import" href="../../bower_components/polymer-ui-elements/polymer-ui-ratings/polymer-ui-ratings.html"> 
+<link rel="import" href="../../bower_components/polymer-ui-elements/polymer-ui-tabs/polymer-ui-tabs.html">
+
+
+<polymer-element name="yt-jukebox" attributes="muted index maxResults">
+  <template>
+    <style>
+      :host{
+        display:block;
+      }
+    
+      yt-video {
+        width: 640px;
+        height: 480px;
+      }
+    </style>
+    <link rel="stylesheet" href="yt-jukebox.css">
+
+    <header>
+      <h1>Juke<strong>Tube</strong></h1>
+
+
+      <div id="search">
+        <input is="yt-input" placeholder="Search for a YouTube video" id="input" on-yt-input-commit="{{commitAction}}">
+        <input id="submit" type="image" src="search.png" alt="Search">
+      </div>
+
+      <nav>
+        <a id="play">{{ youtube.state }}</a>
+        <a id="pause">Pause</a>
+      </nav>
+
+      <yt-search id="search" maxResults="{{maxResults}}" list="{{list}}"></yt-search>
+
+    </header>
+
+
+    <div id="results">
+  
+      <template repeat="{{list}}">
+      <div class="video" title="{{title.$t}}" id="{{media$group.yt$videoid.$t}}" on-click="{{queueVideo}}">
+        <img class="video-image" src="{{ media$group.media$thumbnail.0.url }}">
+        <p class="video-title">{{ title.$t }}</p>
+        <p class="video-author">{{ author.0.name.$t }}</p>
+        <p class="video-description">{{ media$group.media$description.$t }}</p>
+
+        <p class="video-ratings">
+        <p><small>Likes: {{ yt$rating.numLikes}}, Dislikes: {{ yt$rating.numDislikes }}</small></p>
+        <polymer-ui-ratings value="{{gd$rating.average}}"></polymer-ui-ratings>
+        </p>
+      </div>
+      </template>
+
+    </div>
+
+
+    <div id="player">
+   
+      <yt-video id="video" videoEntry="{{video}}" muted="{{muted}}"></yt-video>
+  
+    </div>
+
+    <div id="playlist">
+ 
+      <p id="current">{{ youtube.videoTitle }}</p>
+      <ol id="upcoming">
+        <template repeat="{{upcoming}}">
+          <li>
+            <p class="item-delete" id="{{id}}" data-list="upcoming" on-click="{{deleteVideo}}">delete</p>
+              <p class="item-title" id="{{id}}" title="{{title}}" on-click="{{launchVideo}}">{{title}}</p>
+          </li>
+        </template>
+      </ol>
+
+      <ol id="history">
+        <template repeat="{{history}}">
+          <li>
+           <p class="item-delete" id="{{id}}" data-list="history" on-click="{{deleteVideo}}">delete</p>
+              <p class="item-title" id="{{id}}" title="{{title}}" on-click="{{launchVideo}}">{{title}}</p>
+          </li>
+        </template>
+      </ol>
+
+        <polymer-ui-tabs selected="0">
+        <span>Upcoming</span>
+        <span>History</span>
+      </polymer-ui-tabs>
+
+    </div>
+
+  </template>
+ <script>
+    Polymer('yt-jukebox', {
+      muted: false,
+      index: 0,
+      maxResults: 50,
+      youtube: {
+        ready: false,
+        player: null,
+        playerId: null,
+        videoId: null,
+        videoTitle: null,
+        playerHeight: '480',
+        playerWidth: '640',
+        state: 'stopped'
+      },
+      list: null,
+      history: [
+    {id: 'XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)'}
+      ],
+      upcoming: [
+      {id: 'kRJuY6ZDLPo', title: 'La Roux - In for the Kill (Twelves Remix)'},
+      {id: '45YSGFctLws', title: 'Shout Out Louds - Illusions'},
+      {id: 'ktoaj1IpTbw', title: 'CHVRCHES - Gun'},
+      {id: 'FgAJWQCC7L0', title: 'Stardust Music Sounds Better With You (High Quality)'},
+      {id: '8Zh0tY2NfLs', title: 'N.E.R.D. ft. Nelly Furtado - Hot N\' Fun (Boys Noize Remix) HQ'},
+      {id: 'zwJPcRtbzDk', title: 'Daft Punk - Human After All (SebastiAn Remix)'},
+      {id: 'sEwM6ERq0gc', title: 'HAIM - Forever (Official Music Video)'},
+      {id: 'fTK4XTvZWmk', title: 'Housse De Racket Apocalypso'}
+    ],
+    ready: function(){
+
+      this.addEventListener('yt-video-state-change', function(e){
+        if(e.detail === 1){
+          this.youtube.state = 'playing';
+        }
+
+        if(e.detail === 2){
+          this.youtube.state = 'stopped';
+        }
+
+        if(e.detail === 0){
+          this.youtube.state = 'ended';
+          this.videoEnded();
+        }
+
+      });
+
+      this.addEventListener('yt-video-player-created', function(){ 
+        this.launchPlayer(this.history[0].id, this.history[0].title, true);
+      });
+
+      this.addEventListener('tab-selection-change', function(e){ 
+        this.switchToTab(e.detail.index);
+      });
+
+    },
+    commitAction: function(e){
+      this.$.search.query = this.$.input.value;
+    },
+    launchPlayer: function(id, title, cue){
+      
+      this.$.video.cue = cue || false;
+      this.$.video.videoId = id;
+      this.$.video.title = title;
+      this.youtube.videoId = id;
+      this.youtube.videoTitle = title;
+      
+    },
+    launchVideo: function(e,sender,detail){
+      this.launchPlayer(detail.id, detail.title, false);
+    },
+    queueVideo: function(e,sender,detail){
+      
+      this.upcoming.push({
+        id: detail.id,
+        title: detail.title
+      });
+      
+    },
+    archive: function(id, title){
+      this.history.unshift({
+        id: id,
+        title: title
+      });         
+    },
+    archiveVideo: function(e,sender,detail){
+      this.archive(detail.id, detail.title);      
+    },
+    delete: function(list, id){
+      for (var i = list.length - 1; i >= 0; i--) {
+        if (list[i].id === id) {
+          list.splice(i, 1);
+          break;
+        }
+      }       
+    },
+    deleteVideo:function(e,sender,detail){
+      var selectedList = this[detail.dataset.list];
+      this.delete(selectedList, detail.id);
+      this[detail.alt] = selectedList;
+    },
+    videoEnded: function(){
+      this.launchPlayer(this.upcoming[0].id, this.upcoming[0].title);
+      this.archive(this.upcoming[0].id, this.upcoming[0].title);
+      this.delete(this.upcoming, this.upcoming[0].id);
+    },
+    switchToTab: function(tabIndex){
+      if(tabIndex == 0){
+          this.$.upcoming.style.display = 'block';
+          this.$.history.style.display = 'none';
+        }else {
+          this.$.upcoming.style.display = 'none';
+          this.$.history.style.display = 'block';
+      }
+    },
+    listChanged: function() {
+      console.log('list changed');
+    }
+    });
+  </script>
+</polymer-element>
