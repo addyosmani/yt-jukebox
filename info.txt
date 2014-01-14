@@ -1,0 +1,8 @@
+yo polymer
+yo polymer:element yt-input
+bower install Polymer/yt-search Polymer/yt-video --save
+add styling for elements
+add an input and bind query to show query= and list with template working
+bower install Polymer/yt-search Polymer/yt-search --save
+Modify yt-search and yt-video as needed
+Author the rest of the application
