@@ -1,0 +1,20 @@
+
+  body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td{ font-style: normal; font-weight: normal; margin: 0; padding: 0;}
+  table{ border-collapse: collapse; border-spacing: 0;}
+  fieldset, img{ border: 0;}
+  address, caption, cite, code, dfn, var{ font-style: normal; font-weight: normal;}
+  ol, ul{ list-style: none;}
+  caption, th{ text-align: left;}
+  h1, h2, h3, h4, h5, h6{ font-size: 100%; font-weight: normal;}
+  q: before, q: after{ content: '';}
+  abbr, acronym{ border: 0;}
+
+  html{ background: #eee url(../images/shattered.png) repeat top center;}
+  body{ margin: 0 auto 100px; position: relative; width: 1280px;}
+  a{ cursor: pointer;}
+
+  body, input{ font: 20px/1 'Gotham Book', Gotham-Book, Arial, sans-serif;}
+  h1 strong, #playlist, .video-title{ font-family: 'Gotham Medium', Gotham-Medium, Arial, sans-serif;}
+
+  header{ background: #df1f1f; color: white; height: 40px; padding: 20px 0;}
+  h1{ float: left; line-height: 40px; text-align: center; width: 160px;}

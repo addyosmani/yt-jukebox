@@ -1,0 +1,14 @@
+<!--
+<link rel="import" href="../../bower_components/polymer-ui-elements/polymer-ui-ratings/polymer-ui-ratings.html"> 
+<link rel="import" href="../../bower_components/polymer-ui-elements/polymer-ui-tabs/polymer-ui-tabs.html">
+-->
+
+
+
+ <p><small>Likes: {{ yt$rating.numLikes}}, Dislikes: {{ yt$rating.numDislikes }}</small></p>
+        <polymer-ui-ratings value="{{gd$rating.average}}"></polymer-ui-ratings>
+
+<polymer-ui-tabs selected="0">
+<span>Upcoming</span>
+<span>History</span>
+</polymer-ui-tabs>
