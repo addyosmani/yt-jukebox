@@ -1,0 +1,11 @@
+{
+  "name": "yt-jukebox",
+  "version": "0.0.1",
+  "dependencies": {
+    "platform": "Polymer/platform#master"
+  },
+  "devDependencies": {},
+  "resolutions": {
+    "platform": "master"
+  }
+}
