@@ -1,10 +1,14 @@
 yt-jukebox
 ==========
 
-A YouTube Jukebox application built with Polymer. Shown at DotJS. 
+> A YouTube Jukebox element built with Polymer.js.  
 
 
 ![](http://i.imgur.com/D8LpCUT.png)
+
+## Setup
+
+Install with [npm](https://npmjs.org/) and [bower](http://bower.io): `npm install && bower install`. You can then preview the application by running `grunt server`.
 
 ### Notes
 
@@ -51,3 +55,7 @@ JukeTube is an attempt to simplify this scenario.
 * Ajax search
 * Playlists (upcoming and archived videos)
 * Automatic play (as soon as the current video ends)
+
+## License
+
+MIT © [Addy Osmani](http://addyosmani.com)
