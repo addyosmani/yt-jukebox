@@ -10,6 +10,20 @@ yt-jukebox
 
 Install with [npm](https://npmjs.org/) and [bower](http://bower.io): `npm install && bower install`. You can then preview the application by running `grunt server`.
 
+### Usage:
+
+Include the element in your page:
+    
+```
+<yt-jukebox></yt-jukebox>
+```
+
+Attributes supported:
+
+* maxResults - the maximum number of results to display  
+* muted - whether the video player should be muted
+* index - the tab to display
+
 ### Notes
 
 * This is a Polymer port of [JukeTube](https://github.com/jgthms/juketube) - an AngularJS app.
