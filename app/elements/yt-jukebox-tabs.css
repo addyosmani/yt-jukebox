@@ -1,0 +1,32 @@
+/*
+Copyright 2013 The Polymer Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+*/
+
+@host {
+  * {
+    height: 60px;
+    white-space: nowrap;
+  }
+}
+
+/*@polyfill @host > * */
+::-webkit-distributed(> :not(template)) {
+  display: inline-block;
+  min-width: 60px;
+  background: #333; 
+  height: 64px; 
+  line-height: 45px; 
+  text-align: center; 
+  width:50%;
+  color: #666;
+
+}
+
+/*@polyfill @host > *.polymer-selected */
+::-webkit-distributed(> *.polymer-selected) {
+  color: white;
+  background: #22242a;
+}
+

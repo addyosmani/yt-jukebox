@@ -2,10 +2,8 @@
 <link rel="import" href="../yt-input/yt-input.html">
 <link rel="import" href="../yt-video/yt-video.html">
 <link rel="import" href="../yt-search/yt-search.html">
-
-<!-- Bower elements -->
-<link rel="import" href="../../bower_components/polymer-ui-elements/polymer-ui-ratings/polymer-ui-ratings.html"> 
-<link rel="import" href="../../bower_components/polymer-ui-elements/polymer-ui-tabs/polymer-ui-tabs.html">
+<link rel="import" href="../yt-jukebox-tabs.html"> 
+<link rel="import" href="../yt-jukebox-ratings.html">
 
 
 <polymer-element name="yt-jukebox" attributes="muted index maxResults">
@@ -52,7 +50,9 @@
 
         <p class="video-ratings">
         <p><small>Likes: {{ yt$rating.numLikes}}, Dislikes: {{ yt$rating.numDislikes }}</small></p>
-        <polymer-ui-ratings value="{{gd$rating.average}}"></polymer-ui-ratings>
+
+        <yt-jukebox-ratings value="{{gd$rating.average}}"></yt-jukebox-ratings>
+
         </p>
       </div>
       </template>
@@ -87,10 +87,10 @@
         </template>
       </ol>
 
-        <polymer-ui-tabs selected="0">
+      <yt-jukebox-tabs selected="0">
         <span>Upcoming</span>
         <span>History</span>
-      </polymer-ui-tabs>
+      </yt-jukebox-tabs>
 
     </div>
 
@@ -146,8 +146,8 @@
         this.launchPlayer(this.history[0].id, this.history[0].title, true);
       });
 
-      this.addEventListener('tab-selection-change', function(e){ 
-        this.switchToTab(e.detail.index);
+      this.addEventListener('polymer-activate', function(e){ 
+        this.switchToTab(e.detail.item.impl.textContent);
       });
 
     },
@@ -201,8 +201,8 @@
       this.archive(this.upcoming[0].id, this.upcoming[0].title);
       this.delete(this.upcoming, this.upcoming[0].id);
     },
-    switchToTab: function(tabIndex){
-      if(tabIndex == 0){
+    switchToTab: function(tabText){
+      if(tabText === 'Upcoming'){
           this.$.upcoming.style.display = 'block';
           this.$.history.style.display = 'none';
         }else {
