@@ -39,8 +39,9 @@ Attributes supported:
 * yt-input
 * yt-search
 * yt-video
-* polymer-ui-ratings
-* polymer-ui-tabs
+* yt-jukebox-ratings (polymer-ui-ratings)
+* yt-jukebox-tabs (polymer-ui-tabs)
+* yt-jukebox-selector (polymer-selector)
 
 ### Purpose
 
