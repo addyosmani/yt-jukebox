@@ -3,7 +3,6 @@ yt-jukebox
 
 > A YouTube Jukebox element built with Polymer.js.  
 
-
 ![](http://i.imgur.com/D8LpCUT.png)
 
 ## Setup
@@ -20,9 +19,9 @@ Include the element in your page:
 
 Attributes supported:
 
-* maxResults - the maximum number of results to display  
-* muted - whether the video player should be muted
-* index - the tab to display
+* `maxResults` - the maximum number of results to display  
+* `muted` - whether the video player should be muted
+* `index` - the tab to display
 
 ### Notes
 
