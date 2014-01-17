@@ -2,9 +2,7 @@
   "name": "yt-jukebox",
   "version": "0.0.2",
   "dependencies": {
-    "platform": "Polymer/platform#master"
-  },
-  "devDependencies": {
+    "platform": "Polymer/platform#master",
     "polymer": "Polymer/polymer#~0.1.2",
     "polymer-ui-tabs": "Polymer/polymer-ui-tabs#~0.1.2",
     "polymer-ui-ratings": "Polymer/polymer-ui-ratings#~0.1.2",
