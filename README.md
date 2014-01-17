@@ -9,6 +9,8 @@ yt-jukebox
 
 Install with [npm](https://npmjs.org/) and [bower](http://bower.io): `npm install && bower install`. You can then preview the application by running `grunt server`.
 
+Run `bower info yt-jukebox` to list the available versions of `yt-jukebox` available.
+
 ### Usage:
 
 Include the element after referencing `<link rel="import" href="polymer.html">` in your page:
