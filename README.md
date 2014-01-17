@@ -11,7 +11,7 @@ Install with [npm](https://npmjs.org/) and [bower](http://bower.io): `npm instal
 
 ### Usage:
 
-Include the element in your page:
+Include the element after referencing `<link rel="import" href="polymer.html">` in your page:
     
 ```
 <yt-jukebox></yt-jukebox>
