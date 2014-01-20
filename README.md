@@ -7,9 +7,11 @@ yt-jukebox
 
 ## Setup
 
-Install with [npm](https://npmjs.org/) and [bower](http://bower.io): `npm install && bower install`. You can then preview the application by running `grunt server`.
+1. Run `git clone https://github.com/addyosmani/yt-jukebox.git`
+2. `cd yt-jukebox`
+3. Install our tooling dependencies with [npm](https://npmjs.org/) and [bower](http://bower.io) by running `npm install && bower install`. 
 
-Run `bower info yt-jukebox` to list the available versions of `yt-jukebox` available.
+You can now preview the application by running `grunt server`.
 
 ### Usage:
 
