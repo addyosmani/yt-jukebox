@@ -125,21 +125,18 @@
       {id: 'fTK4XTvZWmk', title: 'Housse De Racket Apocalypso'}
     ],
     ready: function(){
-
+      
       this.addEventListener('yt-video-state-change', function(e){
-        if(e.detail === 1){
-          this.youtube.state = 'playing';
-        }
-
-        if(e.detail === 2){
-          this.youtube.state = 'stopped';
-        }
-
-        if(e.detail === 0){
-          this.youtube.state = 'ended';
-          this.videoEnded();
-        }
-
+          if(e.detail === 1){
+            this.youtube.state = 'playing';
+          }else if(e.detail === 2){
+            this.youtube.state = 'stopped';
+          }else{
+            if(Object.prototype.toString.call(e.detail) == '[object Object]'){
+              this.youtube.state = 'ended';
+              this.videoEnded();
+            }
+          }
       });
 
       this.addEventListener('yt-video-player-created', function(){ 
@@ -155,13 +152,11 @@
       this.$.search.query = this.$.input.value;
     },
     launchPlayer: function(id, title, cue){
-      
       this.$.video.cue = cue || false;
       this.$.video.videoId = id;
       this.$.video.title = title;
       this.youtube.videoId = id;
       this.youtube.videoTitle = title;
-      
     },
     launchVideo: function(e,sender,detail){
       this.launchPlayer(detail.id, detail.title, false);
